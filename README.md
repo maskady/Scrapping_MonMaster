@@ -27,10 +27,10 @@ npm install
 Pour exécuter le projet, vous devez exécuter la commande suivante:
 
 ```bash
-node scrap.js <domaine>
+node run_scraper.js
 ```
 
-Le paramètre domaine est obligatoire. C'est le domaine d'étude que vous voulez scraper. Si votre domaine d'étude est composé de plusieurs mots, vous pouvez l'écrire comme ceci: "domaine d'étude".
+Dans ce fichier vous pouvez changer la variable `disciplines` pour les disciplines que vous voulez scraper.
 
 La sortie du projet est un fichier excel qui contient les colonnes suivantes:
 - Intitulé de la mention
@@ -40,7 +40,8 @@ La sortie du projet est un fichier excel qui contient les colonnes suivantes:
 - Taux d'accès
 - Dernier rang appelé
 - Nombre de candidatures confirmées
-- Lien vers la formation
+- Lien vers la formation (sur le site MonMaster)
+- Lien vers la formation (sur le site de l'université)
 
 ## English
 
@@ -69,10 +70,10 @@ npm install
 To run the project, you need to run the following command:
 
 ```bash
-node scrap.js <field>
+node run_scraper.js
 ```
 
-The field parameter is mandatory. It is the field of study that you want to scrap. If your field of study is composed of multiple words, you can write it like this: "field of study".
+In this file you can change the variable `disciplines` for the disciplines you want to scrape.
 
 The output of the project is an excel file that contains the following columns:
 - Title of the mention
@@ -82,4 +83,5 @@ The output of the project is an excel file that contains the following columns:
 - Access rate
 - Last called rank
 - Number of confirmed applications
-- Link to the course
+- Link to the course (on the MonMaster website)
+- Link to the course (on the university website)
