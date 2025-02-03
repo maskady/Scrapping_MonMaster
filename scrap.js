@@ -4,7 +4,6 @@ import fs from "fs";
 
 const size = 700;
 const args = process.argv.slice(2);
-// Assemblage des arguments en une seule chaîne de caractères
 const field = args.join(" ");
 const fieldUnderscore = field.replace(/ /g, "_");
 const fileName = "formations_" + fieldUnderscore + ".xlsx";
