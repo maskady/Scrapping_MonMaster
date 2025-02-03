@@ -116,6 +116,10 @@ async function saveToExcel() {
             }
         }).filter(Boolean) || [];
 
+        if (lienFormation.length === 0) {
+            lienFormation.push(dict[formation.uai]?.lienFiche);
+        }
+
         let lienFiche = {
             t: "s",
             v: "Lien Fiche",
