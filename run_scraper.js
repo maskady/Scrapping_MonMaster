@@ -7,9 +7,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const oldExcelFolder = path.join(__dirname, 'old_excel_files');
-const disciplines = ['psychologie', 'informatique', 'physique', 'mathématiques', 'mécanique des fluides', 'physique marine']
+const disciplines = ['psychologie']
 
-// 1️⃣ Supprimer tous les fichiers dans le dossier "old_excel_files"
+/**
+ * Deletes all files in the "old_excel_files" folder.
+ * Creates the folder if it doesn't exist.
+ * @returns {void}
+ */
 function cleanOldFiles() {
     if (!fs.existsSync(oldExcelFolder)) {
         fs.mkdirSync(oldExcelFolder); 
@@ -20,10 +24,13 @@ function cleanOldFiles() {
         fs.unlinkSync(filePath);
     });
 
-    console.log('✅ Dossier old_excel_files nettoyé.');
+    console.log('old_excel_files folder cleaned.');
 }
 
-// 2️⃣ Déplacer tous les fichiers .xlsx de la racine vers "old_excel_files"
+/**
+ * Moves all .xlsx files from the root directory to the "old_excel_files" folder.
+ * @returns {void}
+ */
 function moveExcelFiles() {
     const rootFiles = fs.readdirSync(__dirname);
 
@@ -35,21 +42,27 @@ function moveExcelFiles() {
         }
     });
 
-    console.log('✅ Fichiers Excel déplacés dans old_excel_files.');
+    console.log('Excel files moved to old_excel_files.');
 }
 
-// 3️⃣ Exécuter `scrap.js` avec plusieurs disciplines
+/**
+ * Executes scrap.js for each discipline in the disciplines array.
+ * Runs each scraping process sequentially and waits for completion.
+ * @async
+ * @returns {Promise<void>}
+ * @throws {Error} If the scraping process fails for any discipline
+ */
 async function runScraping() {
     for (const discipline of disciplines) {
-        console.log(`🚀 Lancement de node scrap.js ${discipline}...`);
+        console.log(`Starting node scrap.js ${discipline}...`);
         await new Promise((resolve, reject) => {
             exec(`node scrap.js ${discipline}`, (error, stdout, stderr) => {
                 if (error) {
-                    console.error(`❌ Erreur pour ${discipline}:`, error.message);
+                    console.error(`Error for ${discipline}:`, error.message);
                     return reject(error);
                 }
                 if (stderr) {
-                    console.error(`⚠️ Avertissement pour ${discipline}:`, stderr);
+                    console.error(`Warning for ${discipline}:`, stderr);
                 }
                 console.log(stdout);
                 resolve();
@@ -57,10 +70,15 @@ async function runScraping() {
         });
     }
 
-    console.log('✅ Tous les scrapers ont été exécutés.');
+    console.log('All scrapers have been executed.');
 }
 
-// Exécution du script
+/**
+ * Main execution function.
+ * Cleans old files, moves existing Excel files, and runs the scraping process.
+ * @async
+ * @returns {Promise<void>}
+ */
 (async () => {
     cleanOldFiles();
     moveExcelFiles();
